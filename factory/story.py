@@ -30,7 +30,7 @@ def build_storyboard(fact: dict) -> dict:
     source = (fact.get("source") or "").strip()
     topic = (fact.get("topic") or "Curious science").strip()
     profile = _profile(topic)
-    sentences = re.split(r"(?<=[.!?])\\s+", detail)
+    sentences = re.split(r"(?<=[.!?])\s+", detail)
     detail_a = sentences[0] if sentences else core
     detail_b = sentences[1] if len(sentences) > 1 else "The explanation is stranger than the headline."
     narrations = [
@@ -55,12 +55,12 @@ def build_storyboard(fact: dict) -> dict:
             "objects": [profile["subject"], "data_orbit", "particles"],
             "on_screen_text": [title[:58], core[:86], topic.upper()][0 if i == 0 else (1 if i in (1,2,3) else 2)],
         })
-    script = re.sub(r"\\s+", " ", " ".join(narrations)).strip()
+    script = re.sub(r"\s+", " ", " ".join(narrations)).strip()
     return {
         "fact_id": fact.get("id", "unknown"), "topic": topic, "hook": title,
         "source": source, "short_fact": core, "visual_profile": profile,
         "scenes": scenes, "total_duration": sum(durations), "script": script,
-        "title": title[:95], "description": f"{core}\\n\\nSource: {source}\\n\\nFollow DARK FACTS for more.",
+        "title": title[:95], "description": f"{core}\n\nSource: {source}\n\nFollow DARK FACTS for more.",
         "hashtags": "#Shorts #DarkFacts #Science #AmazingFacts",
     }
 
@@ -70,4 +70,4 @@ def storyboard_summary(sb: dict) -> str:
     for i, scene in enumerate(sb["scenes"], 1):
         lines.append(f"  {i}. [{t:4.1f}-{t+scene['duration']:4.1f}s] {scene['id']}: {scene['action']}")
         t += scene["duration"]
-    return "\\n".join(lines)
+    return "\n".join(lines)

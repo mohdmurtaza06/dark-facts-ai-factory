@@ -1,0 +1,26 @@
+{
+  "name": "dark-facts-cinematic-renderer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Procedural Remotion and Three.js renderer for original DARK FACTS Shorts",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "render:pilot": "remotion render src/index.ts DarkMysteryPilot out/dark-mystery-pilot.mp4",
+    "still:pilot": "remotion still src/index.ts DarkMysteryPilot out/pilot-frame.png --frame=900"
+  },
+  "dependencies": {
+    "@react-three/fiber": "^9.1.2",
+    "@remotion/three": "^4.0.300",
+    "postprocessing": "^6.37.8",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "remotion": "^4.0.300",
+    "three": "^0.175.0"
+  },
+  "devDependencies": {
+    "@remotion/cli": "^4.0.300",
+    "@types/react": "^19.0.10",
+    "@types/three": "^0.175.0",
+    "typescript": "^5.8.2"
+  }
+}

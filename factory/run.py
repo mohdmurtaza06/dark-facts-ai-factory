@@ -62,13 +62,10 @@ def produce_one(index, total, fact, out: Path, do_upload: bool) -> dict:
         record["tts_provider"] = tts["provider"]
         logger.info("TTS via %s (%.1fs)", tts["provider"], tts["duration"])
     except Exception as e:
-        logger.warning("TTS failed (%s); placeholder audio", e)
-        subprocess.run([
-            "ffmpeg", "-y", "-f", "lavfi", "-i", "sine=frequency=220:duration=20",
-            "-c:a", "libmp3lame", "-q:a", "5", str(audio),
-        ], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        record["tts_provider"] = "placeholder"
-        record["failure_reason"] = f"TTS unavailable: {e}"
+        record["rendering_status"] = "failed"
+        record["failure_reason"] = f"TTS unavailable: {type(e).__name__}: {e}"
+        logger.exception("Narration unavailable; refusing placeholder audio")
+        return record
     try:
         render_video(sb, audio, video, work)
         probe = validate_video(video)

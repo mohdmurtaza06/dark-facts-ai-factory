@@ -34,3 +34,13 @@ A failed quality gate means **do not upload**. Retry transient provider/render e
 
 ## Cost reality
 GitHub Actions is free for public repositories on standard GitHub-hosted runners, subject to platform limits. YouTube Data API uploads have a default daily upload quota, but the API itself does not supply video-generation compute. Hosted AI video generation is the missing cost/availability dependency. Therefore five premium 3D Shorts/day at ₹0 cannot currently be guaranteed.
+
+## Hosted provider adapter (implemented, not activated)
+The opt-in adapter lives in `factory/video_provider.py` and uses the Hugging Face `InferenceClient.text_to_video` interface. It writes one generated scene clip after validating that the response looks like MP4 data. The adapter is intentionally separate from the legacy renderer and is not called by the daily workflow.
+
+Configuration for a deliberate provider experiment:
+- `HF_TOKEN`: Hugging Face fine-grained token with Inference Providers permission.
+- `VIDEO_MODEL`: exact text-to-video model ID supported by the selected provider.
+- `VIDEO_PROVIDER`: provider name, defaulting to `fal-ai`.
+
+**Billing warning:** Hugging Face Inference Providers routes requests to partner services and is pay-as-you-go. The adapter has no provider-side spend cap. Do not add a token or invoke generation under the ₹0 policy unless the account's available free credit and billing controls have been checked first. The Hugging Face docs currently show text-to-video support and the `InferenceClient.text_to_video` method, but that does not mean the requested five daily outputs are free or guaranteed.

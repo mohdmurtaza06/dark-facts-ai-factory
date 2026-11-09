@@ -15,11 +15,11 @@ jobs:
         working-directory: renderer
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: cloud-automation-foundation
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
-          cache-dependency-path: renderer/package.json
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"

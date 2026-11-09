@@ -1,0 +1,49 @@
+name: DARK FACTS Cloud Factory Readiness
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 3 * * *" # 09:00 Asia/Kolkata
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dark-facts-cloud-factory
+  cancel-in-progress: false
+
+jobs:
+  readiness:
+    # The schedule remains dormant until the owner explicitly enables this variable.
+    if: vars.CLOUD_FACTORY_ENABLED == 'true' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Report production readiness
+        env:
+          VIDEO_PROVIDER_URL: ${{ secrets.VIDEO_PROVIDER_URL }}
+          VIDEO_PROVIDER_TOKEN: ${{ secrets.VIDEO_PROVIDER_TOKEN }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          CLOUD_FACTORY_ENABLED: ${{ vars.CLOUD_FACTORY_ENABLED }}
+        run: |
+          python - <<'PY'
+          import os
+          checks = {
+              "Cloud production explicitly enabled": os.getenv("CLOUD_FACTORY_ENABLED") == "true",
+              "Hosted video provider endpoint configured": bool(os.getenv("VIDEO_PROVIDER_URL")),
+              "Hosted video provider credential configured": bool(os.getenv("VIDEO_PROVIDER_TOKEN")),
+              "YouTube OAuth client ID configured": bool(os.getenv("YT_CLIENT_ID")),
+              "YouTube OAuth client secret configured": bool(os.getenv("YT_CLIENT_SECRET")),
+              "YouTube refresh token configured": bool(os.getenv("YT_REFRESH_TOKEN")),
+          }
+          for label, ok in checks.items():
+              print(f'{"PASS" if ok else "BLOCKED"}: {label}')
+          print("\nThis is a readiness check only. It does not generate or upload videos.")
+          if not all(checks.values()):
+              raise SystemExit("Cloud factory is not production-ready. No videos were generated or uploaded.")
+          PY

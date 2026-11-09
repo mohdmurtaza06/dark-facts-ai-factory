@@ -5,4 +5,10 @@ __pycache__/
 token.json
 output/*
 !output/.gitkeep
+!output/final.mp4
+!output/contact_sheet.jpg
+!output/qc_report.json
+!output/storyboard.json
+!output/20261109_1_octopus-hearts.mp4
 data/used_facts.json
+data/uploaded_videos.json

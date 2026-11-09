@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "duration": 20.0,
+  "width": 1080,
+  "height": 1920,
+  "video_codec": "h264",
+  "has_audio": true,
+  "size_bytes": 2372848,
+  "scene_count": 6,
+  "total_frames": 160,
+  "checks": {
+    "resolution_1080x1920": true,
+    "duration_18_22": true,
+    "has_audio": true,
+    "six_scenes": true,
+    "non_empty": true
+  }
+}

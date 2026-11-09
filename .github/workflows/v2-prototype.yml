@@ -1,0 +1,46 @@
+name: Dark Facts V2 Prototype
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dark-facts-v2-prototype
+  cancel-in-progress: false
+
+jobs:
+  render-one-short:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - name: Install Blender
+        run: |
+          curl -sL "https://download.blender.org/release/Blender4.2/blender-4.2.5-linux-x64.tar.xz" -o /tmp/blender.tar.xz
+          tar -xf /tmp/blender.tar.xz -C /tmp
+          echo "BLENDER_PATH=/tmp/blender-4.2.5-linux-x64/blender" >> $GITHUB_ENV
+          /tmp/blender-4.2.5-linux-x64/blender --version
+      - name: Install Python deps
+        run: pip install -r requirements.txt
+      - name: Unit tests
+        run: python -m unittest discover -s tests -v
+      - name: Render ONE Short (no upload)
+        env:
+          BLENDER_PATH: ${{ env.BLENDER_PATH }}
+        run: python -m factory.run --count 1 --fact-id octopus-hearts --output output --no-upload
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dark-facts-v2-prototype-${{ github.run_number }}
+          path: output/
+          retention-days: 14
+          if-no-files-found: warn

@@ -1,0 +1,202 @@
+{
+  "fact_id": "octopus-hearts",
+  "topic": "Ocean",
+  "hook": "This creature has THREE hearts.",
+  "source": "https://ocean.si.edu/ocean-life/invertebrates/octopuses",
+  "short_fact": "An octopus has three hearts, and its main heart temporarily stops beating while it swims.",
+  "character": {
+    "id": "octo",
+    "name": "Octo",
+    "body_color": [
+      0.55,
+      0.25,
+      0.7
+    ],
+    "accent_color": [
+      0.85,
+      0.4,
+      0.75
+    ],
+    "eye_white": [
+      0.98,
+      0.98,
+      1.0
+    ],
+    "pupil_color": [
+      0.05,
+      0.05,
+      0.1
+    ],
+    "tentacle_count": 8
+  },
+  "environment_theme": "deep_ocean",
+  "scenes": [
+    {
+      "id": "mystery",
+      "duration": 3.0,
+      "narration": "Deep below the waves\u2026 something is watching.",
+      "action": "diver_discovers",
+      "camera": {
+        "type": "dolly_in",
+        "start": [
+          0,
+          -5,
+          1.5
+        ],
+        "end": [
+          0,
+          -3,
+          1.3
+        ],
+        "lens": 32
+      },
+      "objects": [
+        "diver",
+        "dark_silhouette"
+      ],
+      "vfx": [
+        "god_rays",
+        "plankton"
+      ]
+    },
+    {
+      "id": "reveal",
+      "duration": 3.0,
+      "narration": "An octopus. Eight arms. And a secret inside.",
+      "action": "octopus_approaches",
+      "camera": {
+        "type": "push_in",
+        "start": [
+          0,
+          -3.5,
+          1.2
+        ],
+        "end": [
+          0,
+          -2.0,
+          1.1
+        ],
+        "lens": 40
+      },
+      "objects": [
+        "octopus_full"
+      ],
+      "vfx": [
+        "bubbles",
+        "caustics"
+      ]
+    },
+    {
+      "id": "swim",
+      "duration": 4.0,
+      "narration": "It glides through the reef\u2026 soft, silent, unstoppable.",
+      "action": "octopus_swims",
+      "camera": {
+        "type": "side_track",
+        "start": [
+          -2.5,
+          -2.0,
+          1.2
+        ],
+        "end": [
+          2.0,
+          -2.0,
+          1.2
+        ],
+        "lens": 35
+      },
+      "objects": [
+        "octopus_full",
+        "coral",
+        "fish"
+      ],
+      "vfx": [
+        "bubbles",
+        "caustics"
+      ]
+    },
+    {
+      "id": "hearts_reveal",
+      "duration": 4.0,
+      "narration": "Look closer. One heart. Two hearts\u2026 THREE beating hearts!",
+      "action": "anatomical_reveal",
+      "camera": {
+        "type": "dramatic_low",
+        "pos": [
+          0,
+          -2.2,
+          0.5
+        ],
+        "target": [
+          0,
+          0,
+          1.0
+        ],
+        "lens": 28
+      },
+      "objects": [
+        "octopus_xray",
+        "heart_1",
+        "heart_2",
+        "heart_3"
+      ],
+      "vfx": [
+        "heart_pulse",
+        "rim_light"
+      ]
+    },
+    {
+      "id": "explain",
+      "duration": 3.0,
+      "narration": "Two hearts pump blood to the gills. The third powers the body. When it swims, that main heart stops.",
+      "action": "hearts_function",
+      "camera": {
+        "type": "orbit",
+        "center": [
+          0,
+          0,
+          1.0
+        ],
+        "radius": 3.0,
+        "lens": 40
+      },
+      "objects": [
+        "octopus_xray",
+        "heart_1",
+        "heart_2",
+        "heart_3"
+      ],
+      "vfx": [
+        "blood_flow"
+      ]
+    },
+    {
+      "id": "hero",
+      "duration": 3.0,
+      "narration": "Three hearts. One legend. Nature is stranger than fiction.",
+      "action": "hero_pose",
+      "camera": {
+        "type": "hero_orbit",
+        "center": [
+          0,
+          0,
+          1.0
+        ],
+        "radius": 3.8,
+        "lens": 35
+      },
+      "objects": [
+        "octopus_full"
+      ],
+      "vfx": [
+        "volumetric_rays",
+        "sparkles"
+      ]
+    }
+  ],
+  "total_duration": 20.0,
+  "script": "Deep below the waves\u2026 something is watching. An octopus. Eight arms. And a secret inside. It glides through the reef\u2026 soft, silent, unstoppable. Look closer. One heart. Two hearts\u2026 THREE beating hearts! Two hearts pump blood to the gills. The third powers the body. When it swims, that main heart stops. Three hearts. One legend. Nature is stranger than fiction.",
+  "title": "Why Does an Octopus Have THREE Hearts? \ud83d\ude33",
+  "description": "An octopus has three hearts, and its main heart temporarily stops beating while it swims.\n\nSource: https://ocean.si.edu/ocean-life/invertebrates/octopuses\nFollow DARK FACTS for more mind-blowing science.",
+  "hashtags": "#Shorts #DarkFacts #Octopus #ScienceFacts #MindBlowingFacts #3DAnimation"
+}

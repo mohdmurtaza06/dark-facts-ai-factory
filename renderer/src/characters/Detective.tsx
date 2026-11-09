@@ -2,37 +2,48 @@ import React from "react";
 import {interpolate} from "remotion";
 
 export const Detective: React.FC<{frame: number}> = ({frame}) => {
-  const walk = Math.sin(frame / 7) * 0.12;
-  const turn = interpolate(frame, [450, 510, 600, 660], [0, 0.75, 0.75, 0], {extrapolateLeft: "clamp", extrapolateRight: "clamp"});
+  const walk = Math.sin(frame / 7) * 0.13;
+  const approach = interpolate(frame, [180, 420, 600, 780], [0, -0.85, -0.85, 0], {extrapolateLeft: "clamp", extrapolateRight: "clamp"});
+  const recoil = interpolate(frame, [1110, 1140, 1200, 1260], [0, 0.32, 0.32, 0], {extrapolateLeft: "clamp", extrapolateRight: "clamp"});
+  const turn = interpolate(frame, [900, 990, 1110, 1170], [0, 1.2, 1.2, 0], {extrapolateLeft: "clamp", extrapolateRight: "clamp"});
+  const bob = Math.abs(walk) * 0.24;
   return (
-    <group position={[0, -0.45, 2.1]} rotation={[0, turn, 0]}>
-      <mesh position={[0, 0.72 + Math.abs(walk) * 0.2, 0]} castShadow>
-        <capsuleGeometry args={[0.38, 0.9, 6, 12]}/>
-        <meshStandardMaterial color="#202a3c" roughness={0.8}/>
+    <group position={[0.25, -0.45, 2.2 + approach]} rotation={[0, turn, recoil]}>
+      <mesh position={[0, 0.76 + bob, 0]} castShadow>
+        <capsuleGeometry args={[0.39, 0.96, 7, 14]}/>
+        <meshStandardMaterial color="#202b3d" roughness={0.82}/>
       </mesh>
-      <mesh position={[0, 1.55 + Math.abs(walk) * 0.2, 0]} castShadow>
-        <sphereGeometry args={[0.38, 24, 18]}/>
-        <meshStandardMaterial color="#d7a77f" roughness={0.68}/>
+      <mesh position={[0, 1.68 + bob, 0]} castShadow>
+        <sphereGeometry args={[0.39, 28, 22]}/>
+        <meshStandardMaterial color="#d5a47c" roughness={0.68}/>
       </mesh>
-      <mesh position={[0, 1.83 + Math.abs(walk) * 0.2, -0.03]} castShadow>
-        <sphereGeometry args={[0.4, 24, 12, 0, Math.PI * 2, 0, Math.PI * 0.48]}/>
+      <mesh position={[0, 1.96 + bob, -0.035]} castShadow>
+        <sphereGeometry args={[0.41, 28, 14, 0, Math.PI * 2, 0, Math.PI * 0.49]}/>
         <meshStandardMaterial color="#11151f" roughness={0.9}/>
       </mesh>
-      <mesh position={[0, 1.43, 0.34]}>
-        <boxGeometry args={[0.42, 0.09, 0.05]}/>
-        <meshBasicMaterial color="#15131a"/>
+      <mesh position={[0, 1.54 + bob, 0.35]}>
+        <boxGeometry args={[0.45, frame > 1110 && frame < 1260 ? 0.13 : 0.07, 0.05]}/>
+        <meshBasicMaterial color="#17131a"/>
       </mesh>
-      <mesh position={[-0.18, 0.12 + walk, 0]} rotation={[walk, 0, 0]} castShadow>
-        <capsuleGeometry args={[0.13, 0.62, 4, 8]}/>
-        <meshStandardMaterial color="#111722"/>
+      <mesh position={[-0.2, 0.16 + walk, 0]} rotation={[walk, 0, 0]} castShadow>
+        <capsuleGeometry args={[0.13, 0.66, 5, 9]}/>
+        <meshStandardMaterial color="#101722"/>
       </mesh>
-      <mesh position={[0.18, 0.12 - walk, 0]} rotation={[-walk, 0, 0]} castShadow>
-        <capsuleGeometry args={[0.13, 0.62, 4, 8]}/>
-        <meshStandardMaterial color="#111722"/>
+      <mesh position={[0.2, 0.16 - walk, 0]} rotation={[-walk, 0, 0]} castShadow>
+        <capsuleGeometry args={[0.13, 0.66, 5, 9]}/>
+        <meshStandardMaterial color="#101722"/>
       </mesh>
-      <mesh position={[0.52, 0.78, 0.08]} rotation={[0, 0, -0.2 + walk]} castShadow>
-        <capsuleGeometry args={[0.11, 0.62, 4, 8]}/>
-        <meshStandardMaterial color="#202a3c"/>
+      <mesh position={[0.53, 0.85 + bob, 0.08]} rotation={[0, 0, -0.24 + walk]}>
+        <capsuleGeometry args={[0.11, 0.68, 5, 9]}/>
+        <meshStandardMaterial color="#202b3d"/>
+      </mesh>
+      <mesh position={[-0.5, 0.88 + bob, 0.08]} rotation={[0, 0, 0.22 - walk]}>
+        <capsuleGeometry args={[0.11, 0.65, 5, 9]}/>
+        <meshStandardMaterial color="#202b3d"/>
+      </mesh>
+      <mesh position={[0.53, 0.42, 0.2]} rotation={[0, 0, 0.3]}>
+        <boxGeometry args={[0.22, 0.34, 0.18]}/>
+        <meshStandardMaterial color="#d6b16e" metalness={0.5} roughness={0.3} emissive="#5b3b16" emissiveIntensity={0.4}/>
       </mesh>
     </group>
   );

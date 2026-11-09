@@ -22,8 +22,8 @@ def probe_video(path: str | Path) -> dict:
     return json.loads(result.stdout)
 
 
-def validate_video(path: str | Path, min_duration: float = 15.0,
-                   max_duration: float = 20.0) -> list[str]:
+def validate_video(path: str | Path, min_duration: float = 55.0,
+                   max_duration: float = 70.0) -> list[str]:
     file_path = Path(path)
     errors: list[str] = []
     if not file_path.is_file():

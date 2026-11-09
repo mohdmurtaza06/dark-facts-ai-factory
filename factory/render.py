@@ -31,14 +31,16 @@ def wrap(draw, text, fnt, max_width):
 def frame_image(package, frame, total_frames):
     t = frame / max(1, total_frames-1)
     scene = min(4, int(t*5))
-    im = Image.new("RGB", (W,H), (3,7,18))
-    pix = im.load()
-    for y in range(H):
-        for x in range(0,W,4):
-            glow=max(0,1-math.sqrt(((x-W*.52)/(W*.9))**2+((y-H*.45)/(H*.8))**2))
-            wave=(math.sin(x*.018+frame*.12)+1)*2
-            c=(int(3+glow*4),int(7+glow*18+wave),int(18+glow*48+wave*2))
-            for xx in range(x,min(x+4,W)): pix[xx,y]=c
+    # Render the gradient at quarter resolution, then upscale to keep daily
+    # five-video batches practical on free GitHub-hosted runners.
+    bg = Image.new("RGB", (180, 320), (3, 7, 18))
+    bp = bg.load()
+    for y in range(320):
+        for x in range(180):
+            glow = max(0, 1-math.sqrt(((x-90)/225)**2+((y-144)/200)**2))
+            wave = (math.sin(x*.072+frame*.12)+1)*2
+            bp[x,y] = (int(3+glow*4), int(7+glow*18+wave), int(18+glow*48+wave*2))
+    im = bg.resize((W, H), Image.Resampling.BILINEAR)
     d=ImageDraw.Draw(im,"RGBA")
     random.seed(41)
     for i in range(65):

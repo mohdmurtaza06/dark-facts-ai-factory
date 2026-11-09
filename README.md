@@ -1,45 +1,32 @@
 # DARK FACTS AI FACTORY
 
-A free-first, GitHub Actions-based YouTube Shorts production pipeline.
+A cloud-first YouTube Shorts automation project.
 
-## V1 scope
-- Pick non-repeating topics from a reviewed fact library.
-- Build short English narration and metadata from templates.
-- Render original dark anime-inspired motion graphics (not full generative anime footage).
-- Generate narration with Edge TTS.
-- Render vertical MP4 using Pillow + FFmpeg.
-- Upload with the official YouTube Data API v3 when OAuth secrets are configured.
-- Keep output manifests and video artifacts.
+## Current state
 
-## Important limitations
-This MVP is template-based, not an autonomous web researcher or LLM scriptwriter. The visual renderer creates motion graphics, not full AI-generated scenes. Five unique topics per day requires expanding the reviewed fact library. Free-tier limits, TTS availability and YouTube quota can prevent a guaranteed five uploads each day.
+The existing V1 renderer creates Pillow/FFmpeg motion graphics. It does **not** create premium 3D animated scenes. The old daily publishing workflow remains paused.
 
-## Setup
-1. Add GitHub Actions secrets: `YT_CLIENT_ID`, `YT_CLIENT_SECRET`, `YT_REFRESH_TOKEN`.
-2. Enable YouTube Data API v3 in a Google Cloud project and create an OAuth Desktop client.
-3. Use `scripts/get_youtube_token.py` locally to obtain a refresh token. Never commit credentials.
-4. Check YouTube OAuth consent-screen publishing status. External apps left in Testing can issue refresh tokens that expire after seven days.
-5. Start with `YT_PRIVACY_STATUS=unlisted` and test before switching to public.
+The `cloud-automation-foundation` branch adds:
+- A cloud readiness workflow with a daily schedule that stays dormant until explicitly enabled.
+- A fail-closed technical MP4 quality gate and tests.
+- Production requirements, publishing safeguards, and a clear provider integration contract.
 
-## Local run
+## Important ₹0 limitation
+
+GitHub Actions and the YouTube Data API can provide free orchestration/upload within their respective limits, but neither provides AI video-generation compute. Free hosted GPU services do not guarantee the capacity required for five premium 3D Shorts every day. This repository therefore does not pretend that the 5/day premium 3D target is already achieved.
+
+**Do not enable unattended publishing yet.** A genuine hosted video-generation backend, credentials/quotas, YouTube OAuth secrets, persistent deduplication, and a successful quality-reviewed sample are still required. The system must fail closed rather than fall back to the legacy motion-graphics renderer.
+
+## Documentation
+
+- [Cloud automation architecture and provider contract](docs/CLOUD_AUTOMATION.md)
+- [Production gates](docs/PRODUCTION_GATES.md)
+
+## Existing V1 local commands
+
 ```bash
 pip install -r requirements.txt
-python -m factory.run --count 1 --output output
+python -m factory.run --count 1 --output output --no-upload
 ```
 
-Upload locally:
-```bash
-python -m factory.run --count 1 --output output --upload
-```
-
-## GitHub Actions
-The workflow runs at 09:00 India time daily and supports manual dispatch. The scheduled workflow will fail at the upload step until all three YouTube secrets are added. Configure the consent screen and YouTube API quota before enabling public automation.
-
-## Project layout
-- `factory/content.py`: topic selection and metadata
-- `factory/voice.py`: narration generation
-- `factory/render.py`: anime-inspired motion graphics + FFmpeg
-- `factory/youtube.py`: YouTube uploader
-- `factory/run.py`: orchestration
-- `data/facts.json`: fact library and source links
-- `.github/workflows/daily-shorts.yml`: schedule
+The existing renderer is retained for legacy testing only. It is not the requested premium 3D production backend.

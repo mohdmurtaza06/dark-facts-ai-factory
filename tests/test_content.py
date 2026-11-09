@@ -41,6 +41,7 @@ class ContentTests(unittest.TestCase):
             "fact": "A factual sentence.", "short_fact": "A short summary.",
             "source": "https://example.org"
         })
+        self.assertEqual(package["hook"], "A surprising fact!")
         self.assertIn("https://example.org", package["description"])
         self.assertLessEqual(len(package["title"]), 100)
         self.assertIn("A factual sentence.", package["script"])

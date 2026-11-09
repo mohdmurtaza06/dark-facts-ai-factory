@@ -1,0 +1,74 @@
+[
+  {
+    "id": "octopus-hearts",
+    "topic": "Ocean",
+    "hook": "This creature has THREE hearts.",
+    "fact": "An octopus has three hearts. Two pump blood to the gills, while the systemic heart pumps blood to the rest of the body. The systemic heart temporarily stops beating while the octopus swims.",
+    "short_fact": "An octopus has three hearts, and its main heart temporarily stops beating while it swims.",
+    "source": "https://ocean.si.edu/ocean-life/invertebrates/octopuses",
+    "evidence": "Smithsonian Ocean overview of octopus biology."
+  },
+  {
+    "id": "venus-day",
+    "topic": "Space",
+    "hook": "A day on Venus is longer than its year.",
+    "fact": "Venus rotates so slowly that one sidereal rotation takes longer than one orbit around the Sun.",
+    "short_fact": "Venus takes longer to rotate once than to orbit the Sun once.",
+    "source": "https://science.nasa.gov/venus/venus-facts/",
+    "evidence": "NASA Venus facts page."
+  },
+  {
+    "id": "sharks-trees",
+    "topic": "Evolution",
+    "hook": "Sharks are older than trees.",
+    "fact": "The earliest known sharks appeared hundreds of millions of years ago, before the first trees evolved.",
+    "short_fact": "Shark ancestors existed before the earliest trees.",
+    "source": "https://www.nhm.ac.uk/discover/when-did-sharks-evolve.html",
+    "evidence": "Natural History Museum overview of shark evolution."
+  },
+  {
+    "id": "saturn-float",
+    "topic": "Space",
+    "hook": "Saturn is less dense than water.",
+    "fact": "Saturn's average density is lower than liquid water, so in a hypothetical ocean large enough, it would float. This is a thought experiment, not a practical possibility.",
+    "short_fact": "Saturn's average density is lower than water, so it would theoretically float in a gigantic ocean.",
+    "source": "https://science.nasa.gov/saturn/facts/",
+    "evidence": "NASA Saturn facts page."
+  },
+  {
+    "id": "wombat-poop",
+    "topic": "Animals",
+    "hook": "Wombats produce cube-shaped poop.",
+    "fact": "Wombats produce roughly cube-shaped feces. Research indicates the shape forms in the intestine due to variations in tissue stiffness and contractions.",
+    "short_fact": "Wombats produce cube-shaped droppings, formed by the mechanics of their intestines.",
+    "source": "https://www.science.org/doi/10.1126/sciadv.aau451",
+    "evidence": "Peer-reviewed research on the formation of cubed wombat feces."
+  },
+  {
+    "id": "water-bear",
+    "topic": "Extreme life",
+    "hook": "A tiny animal can survive extreme conditions.",
+    "fact": "Tardigrades can survive some extreme conditions, including exposure to vacuum and radiation, especially in a dehydrated state. They are not indestructible.",
+    "short_fact": "Tardigrades can survive some extreme conditions by entering a dehydrated state, but they are not indestructible.",
+    "source": "https://www.nhm.ac.uk/discover/what-are-tardigrades.html",
+    "evidence": "Natural History Museum overview of tardigrades."
+  },
+  {
+    "id": "lightning-hot",
+    "topic": "Weather",
+    "hook": "Lightning can be hotter than the Sun's surface.",
+    "fact": "The air in a lightning channel can reach around 30,000 kelvin, hotter than the visible surface of the Sun.",
+    "short_fact": "A lightning channel can heat the surrounding air to roughly 30,000 kelvin.",
+    "source": "https://www.nssl.noaa.gov/education/svrwx101/lightning/",
+    "evidence": "NOAA National Severe Storms Laboratory lightning education."
+  },
+  {
+    "id": "moon-distance",
+    "topic": "Space",
+    "hook": "The Moon is slowly moving away from Earth.",
+    "fact": "The Moon is receding from Earth at an average rate of about 3.8 centimetres per year, measured using lunar laser ranging.",
+    "short_fact": "The Moon moves away from Earth by about 3.8 centimetres each year.",
+    "source": "https://science.nasa.gov/moon/",
+    "evidence": "NASA Moon science resources."
+  }
+]\n

@@ -3,8 +3,10 @@ import {AbsoluteFill, interpolate, useCurrentFrame} from "remotion";
 import {ThreeCanvas} from "@remotion/three";
 import {Environment} from "../world/Environment";
 import {Detective} from "../characters/Detective";
+import {Reflection} from "../characters/Reflection";
 import {TitleCard} from "../ui/TitleCard";
 import {NarrativeCaptions} from "../ui/NarrativeCaptions";
+import {PilotAudio} from "../audio/PilotAudio";
 
 export const DarkMysteryPilot: React.FC = () => {
   const frame = useCurrentFrame();
@@ -16,9 +18,11 @@ export const DarkMysteryPilot: React.FC = () => {
       <ThreeCanvas width={1080} height={1920} camera={{position: [cameraX, 3.4, cameraZ], fov: 38}}>
         <Environment frame={frame}/>
         <Detective frame={frame}/>
+        <Reflection frame={frame}/>
       </ThreeCanvas>
       <TitleCard frame={frame}/>
       <NarrativeCaptions frame={frame}/>
+      <PilotAudio/>
     </AbsoluteFill>
   );
 };

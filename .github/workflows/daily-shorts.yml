@@ -1,0 +1,59 @@
+name: Dark Facts Daily Shorts
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 3 * * *" # 09:00 India time (UTC+5:30)
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dark-facts-daily
+  cancel-in-progress: false
+
+jobs:
+  generate-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Restore fact rotation history
+        uses: actions/cache/restore@v4
+        with:
+          path: data/used_facts.json
+          key: dark-facts-history-${{ github.run_id }}
+          restore-keys: |
+            dark-facts-history-
+      - name: Generate and publish five Shorts
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          YT_PRIVACY_STATUS: unlisted
+        run: python -m factory.run --count 5 --output output --upload
+      - name: Save fact rotation history
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: data/used_facts.json
+          key: dark-facts-history-${{ github.run_id }}
+      - name: Upload production artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dark-facts-shorts-${{ github.run_number }}
+          path: output/
+          retention-days: 7

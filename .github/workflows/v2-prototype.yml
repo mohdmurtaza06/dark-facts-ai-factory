@@ -2,6 +2,14 @@ name: Dark Facts V2 Five-Video Cloud Test
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - production-factory-v1
+    paths:
+      - "factory/**"
+      - "data/facts.json"
+      - "tests/**"
+      - ".github/workflows/v2-prototype.yml"
 
 permissions:
   contents: read

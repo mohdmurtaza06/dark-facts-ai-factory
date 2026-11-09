@@ -11,3 +11,7 @@ data/used_facts.json
 renderer/node_modules/
 renderer/out/
 renderer/.remotion/
+
+# Generated renderer audio
+renderer/public/audio/*.mp3
+renderer/public/audio/*.wav

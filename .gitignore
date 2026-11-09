@@ -6,3 +6,8 @@ token.json
 output/*
 !output/.gitkeep
 data/used_facts.json
+
+# Remotion renderer
+renderer/node_modules/
+renderer/out/
+renderer/.remotion/

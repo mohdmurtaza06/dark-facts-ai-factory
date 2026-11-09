@@ -35,6 +35,6 @@ def build_package(fact):
         "Follow DARK FACTS for more science, nature and space mysteries."
     )
     hashtags = "#Shorts #DarkFacts #MindBlowingFacts #ScienceFacts #DidYouKnow"
-    return {"fact_id": fact["id"], "topic": fact["topic"], "title": title,
+    return {"fact_id": fact["id"], "topic": fact["topic"], "hook": fact["hook"], "title": title,
             "description": description, "hashtags": hashtags, "script": script,
             "source": fact["source"], "short_fact": fact["short_fact"]}

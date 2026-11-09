@@ -36,7 +36,7 @@ jobs:
       - name: TypeScript validation
         run: npx tsc --noEmit
       - name: Render 60-second 1080x1920 pilot
-        run: npx remotion render src/index.ts DarkMysteryPilot out/the-last-elevator.mp4 --codec=h264 --crf=23
+        run: npx remotion render src/index.ts DarkMysteryPilot out/the-last-elevator.mp4 --codec=h264 --crf=23 --gl=swangle --concurrency=1
       - name: Probe rendered file
         run: |
           ffprobe -v error -show_entries format=duration,size:stream=codec_type,width,height,codec_name -of json out/the-last-elevator.mp4

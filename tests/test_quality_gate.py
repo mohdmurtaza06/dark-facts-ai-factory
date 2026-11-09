@@ -7,7 +7,7 @@ from factory.quality_gate import validate_video
 
 
 GOOD = {
-    "format": {"duration": "18.0", "size": "500000"},
+    "format": {"duration": "60.0", "size": "500000"},
     "streams": [
         {"codec_type": "video", "width": 1080, "height": 1920, "codec_name": "h264"},
         {"codec_type": "audio", "codec_name": "aac"},

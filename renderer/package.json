@@ -6,7 +6,8 @@
   "scripts": {
     "studio": "remotion studio src/index.ts",
     "render:pilot": "remotion render src/index.ts DarkMysteryPilot out/dark-mystery-pilot.mp4",
-    "still:pilot": "remotion still src/index.ts DarkMysteryPilot out/pilot-frame.png --frame=900"
+    "still:pilot": "remotion still src/index.ts DarkMysteryPilot out/pilot-frame.png --frame=900",
+    "audio:pilot": "python scripts/generate_audio.py"
   },
   "dependencies": {
     "@react-three/fiber": "^9.1.2",

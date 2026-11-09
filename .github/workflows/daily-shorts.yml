@@ -1,9 +1,7 @@
-name: Dark Facts Daily Shorts
+name: Dark Facts Daily Shorts (PAUSED - reliability testing)
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "30 3 * * *" # 09:00 India time (UTC+5:30)
 
 permissions:
   contents: read
@@ -39,13 +37,8 @@ jobs:
           key: dark-facts-history-${{ github.run_id }}
           restore-keys: |
             dark-facts-history-
-      - name: Generate and publish five Shorts
-        env:
-          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
-          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
-          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
-          YT_PRIVACY_STATUS: unlisted
-        run: python -m factory.run --count 5 --output output --upload
+      - name: SAFE MODE: render one sample without YouTube upload
+        run: python -m factory.run --count 1 --output output --no-upload
       - name: Save fact rotation history
         if: always()
         uses: actions/cache/save@v4

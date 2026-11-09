@@ -9,6 +9,8 @@ def load_json(path, default):
     return json.loads(path.read_text(encoding="utf-8")) if path.exists() else default
 
 def choose_facts(count=5):
+    if count < 1:
+        raise ValueError("count must be at least 1")
     facts = load_json(FACTS, [])
     used = set(load_json(USED, []))
     pool = [f for f in facts if f["id"] not in used]
@@ -20,14 +22,19 @@ def choose_facts(count=5):
     random.shuffle(pool)
     selected = pool[:count]
     used.update(f["id"] for f in selected)
+    USED.parent.mkdir(parents=True, exist_ok=True)
     USED.write_text(json.dumps(sorted(used), indent=2), encoding="utf-8")
     return selected
 
 def build_package(fact):
-    script = re.sub(r"\\s+", " ", f"{fact['hook']} {fact['fact']} The natural world is stranger than fiction.").strip()
+    script = re.sub(r"\s+", " ", f"{fact['hook']} {fact['fact']} The natural world is stranger than fiction.").strip()
     title = fact["hook"].rstrip(".!?") + " 😳"
-    description = f"{fact['short_fact']}\\n\\nSource: {fact['source']}\\nFollow DARK FACTS for more science, nature and space mysteries."
+    description = (
+        f"{fact['short_fact']}\n\n"
+        f"Source: {fact['source']}\n"
+        "Follow DARK FACTS for more science, nature and space mysteries."
+    )
     hashtags = "#Shorts #DarkFacts #MindBlowingFacts #ScienceFacts #DidYouKnow"
-    return {"fact_id":fact["id"],"topic":fact["topic"],"title":title,
-            "description":description,"hashtags":hashtags,"script":script,
-            "source":fact["source"],"short_fact":fact["short_fact"]}
+    return {"fact_id": fact["id"], "topic": fact["topic"], "title": title,
+            "description": description, "hashtags": hashtags, "script": script,
+            "source": fact["source"], "short_fact": fact["short_fact"]}

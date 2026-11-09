@@ -42,10 +42,10 @@ The ₹0 policy remains strict:
 - If a free runner cannot complete a render, stop and report the blocker rather than falling back to the legacy Pillow motion graphics.
 
 ## Implementation stages
-- [ ] Add a dedicated Remotion/Three.js renderer workspace without replacing the legacy Python factory.
+- [x] Add an isolated Remotion/Three.js renderer workspace without replacing the legacy Python factory (initial procedural scaffold only).
 - [ ] Port the minimum upstream engine files and preserve MIT notices.
 - [ ] Replace bridge-specific story constants with a generic scene-plan schema.
-- [ ] Create one original 55–70 s dark mystery/comedy pilot.
+- [x] Create a first original 60-second scene scaffold titled “The Last Elevator” (not yet a finished or publishable story).
 - [ ] Render and inspect stills/contact sheets; correct visual defects.
 - [ ] Run a full cloud render benchmark and verify cost/runner limits.
 - [ ] Connect the Python factory to the renderer only after the pilot passes.

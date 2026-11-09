@@ -21,7 +21,7 @@ def upload_video(video_path, package):
     body = {
         "snippet": {
             "title": package["title"][:100],
-            "description": (package["description"] + "\\n\\n" + package["hashtags"])[:5000],
+            "description": (package["description"] + "\n\n" + package["hashtags"])[:5000],
             "tags": ["Shorts", "Dark Facts", "Science Facts", "Mind Blowing Facts"],
             "categoryId": "27"
         },
@@ -34,5 +34,5 @@ def upload_video(video_path, package):
     request = youtube.videos().insert(part="snippet,status", body=body, media_body=media)
     response = None
     while response is None:
-        status, response = request.next_chunk()
+        _, response = request.next_chunk()
     return response.get("id")
